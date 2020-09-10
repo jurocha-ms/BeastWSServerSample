@@ -254,8 +254,6 @@ public:
    }
 
 private:
-   std::vector<std::shared_ptr<session>> sessions_;
-
    void
       do_accept()
    {
@@ -278,10 +276,7 @@ private:
       else
       {
          // Create the session and run it
-         auto sess = std::make_shared<session>(std::move(socket), ctx_);
-         sessions_.push_back( sess );
-
-         sess->run();
+         std::make_shared<session>(std::move(socket), ctx_)->run();
       }
 
       // Accept another connection
