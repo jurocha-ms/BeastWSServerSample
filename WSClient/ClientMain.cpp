@@ -1,5 +1,7 @@
 #include <winrt/Windows.Foundation.h>
+#include <winrt/Windows.Foundation.Collections.h>
 #include <winrt/Windows.Networking.Sockets.h>
+#include <winrt/Windows.Security.Cryptography.Certificates.h>
 #include <winrt/Windows.Storage.Streams.h>
 
 #include <Windows.h>
@@ -9,6 +11,7 @@
 
 using namespace winrt::Windows::Foundation;
 using namespace winrt::Windows::Networking::Sockets;
+using namespace winrt::Windows::Security::Cryptography::Certificates;
 using namespace winrt::Windows::Storage::Streams;
 
 using std::cerr;
@@ -49,6 +52,9 @@ IAsyncAction SendMessageAsync(std::wstring message)
 IAsyncAction MainAsync()
 {
 	s_webSocket.Control().MessageType(SocketMessageType::Utf8);
+	s_webSocket.Control().IgnorableServerCertificateErrors().Append(ChainValidationResult::Untrusted);
+	s_webSocket.Control().IgnorableServerCertificateErrors().Append(ChainValidationResult::InvalidName);
+
 	auto messageReceivedToken = s_webSocket.MessageReceived({ &OnMessageReceived });
 	auto closedEventToken = s_webSocket.Closed({ &OnClosed });
 
@@ -69,6 +75,8 @@ IAsyncAction MainAsync()
 	{
 		wcerr << L"[ERROR] " << e.message().c_str() << endl;
 	}
+
+	cout << "[FINISH]" << endl;
 }
 
 int main()
