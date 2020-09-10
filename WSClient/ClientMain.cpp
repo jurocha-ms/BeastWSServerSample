@@ -39,7 +39,10 @@ IAsyncAction MainAsync()
 
 	try
 	{
-		co_await s_webSocket.ConnectAsync(Uri{L"wss://localhost:5556"});
+		co_await s_webSocket.ConnectAsync(Uri { L"wss://localhost:5556" });
+		//co_await s_webSocket.ConnectAsync(Uri{L"wss://echo.websocket.org"});
+
+		cout << "[CONNECTED] " << endl;
 	}
 	catch (winrt::hresult_error& e)
 	{

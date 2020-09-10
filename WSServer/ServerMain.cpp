@@ -95,7 +95,7 @@ public:
       if (ec)
       {
          //if (ec.value() != 336151574) // "invalid certificate"
-         if (ec.value() != 335544539) // "short read"
+         //if (ec.value() != 335544539) // "short read"
             return fail(ec, "handshake");
       }
 
@@ -129,7 +129,7 @@ public:
    {
       if (ec)
       {
-         if (ec.value() != 335544539) // "short read"
+         //if (ec.value() != 335544539) // "short read"
          return fail(ec, "accept");
       }
 
@@ -161,7 +161,7 @@ public:
 
       if (ec)
       {
-         if (ec.value() != 335544539) // "short read"
+         //if (ec.value() != 335544539) // "short read"
             fail(ec, "read");
       }
 
@@ -270,7 +270,7 @@ private:
    {
       if (ec)
       {
-         if (ec.value() != 335544539) // "short read"
+         //if (ec.value() != 335544539) // "short read"
             fail(ec, "accept");
       }
       else
